@@ -33,8 +33,12 @@ function App() {
       setTodos(prevTodos =>{
         return [...prevTodos,{id:uuidv4(),name:name,complete:false}]
       })
-      console.log(name)
       todoNameRef.current.value = ''
+  }
+
+  function handleClearAll(){
+    const newTodoToClear = todos.filter(todo=>!todo.complete)
+    setTodos(newTodoToClear)
   }
 
   return (
@@ -42,7 +46,7 @@ function App() {
     <TodoList todoList={todos} toggleTodo={toggleTodo}/>
     <input ref={todoNameRef} type="text"/>
     <button onClick={handleAddTodo}>Add Todo</button>
-    <button>Clear Complted Todo</button>
+    <button onClick={handleClearAll}>Clear Complted Todo</button>
     <div>{todos.filter(todo => !todo.complete).length} left to do</div>
     </>
   )
